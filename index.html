@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open House Sign-In - Get Instant Financing Info</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .property-info {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .property-info h2 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .property-info p {
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        .benefits {
+            padding: 25px 20px;
+            background: #fff;
+        }
+
+        .benefits h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .benefit-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateX(5px);
+        }
+
+        .benefit-icon {
+            background: #28a745;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 14px;
+        }
+
+        .form-container {
+            padding: 30px 20px;
+            background: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .privacy-note {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #6c757d;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .agent-info {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .agent-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 Welcome to Our Open House!</h1>
+            <p>Sign in to get instant financing information</p>
+        </div>
+
+        <div class="property-info">
+            <h2 id="propertyAddress">123 Main Street</h2>
+            <p id="propertyDetails">Beautiful 3BR/2BA Home • $450,000</p>
+        </div>
+
+        <div class="benefits">
+            <h3>Get Instant Access To:</h3>
+            <div class="benefit-list">
+                <div class="benefit-item">
+                    <div class="benefit-icon">💰</div>
+                    <div>Your exact monthly payment calculation</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">⚡</div>
+                    <div>Pre-qualification in under 5 minutes</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">📊</div>
+                    <div>Personalized financing options</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <div>Similar homes in your price range</div>
+                </div>
+            </div>
+        </div>
+
+        <form class="form-container" id="signInForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="timeline">Buying Timeline</label>
+                    <select id="timeline" name="timeline">
+                        <option value="">Select timeline</option>
+                        <option value="0-3months">0-3 months</option>
+                        <option value="3-6months">3-6 months</option>
+                        <option value="6-12months">6-12 months</option>
+                        <option value="12months+">12+ months</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="priceRange">Price Range</label>
+                    <select id="priceRange" name="priceRange">
+                        <option value="">Select range</option>
+                        <option value="under300k">Under $300k</option>
+                        <option value="300k-500k">$300k - $500k</option>
+                        <option value="500k-750k">$500k - $750k</option>
+                        <option value="750k+">$750k+</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="currentSituation">Current Situation</label>
+                <select id="currentSituation" name="currentSituation">
+                    <option value="">Select situation</option>
+                    <option value="first-time">First-time buyer</option>
+                    <option value="moving-up">Moving up</option>
+                    <option value="downsizing">Downsizing</option>
+                    <option value="relocating">Relocating</option>
+                    <option value="investment">Investment property</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Get My Financing Info Now! 🚀
+            </button>
+
+            <p class="privacy-note">
+                Your information is secure and will only be used to provide you with relevant financing options and property updates. We respect your privacy.
+            </p>
+        </form>
+
+        <div class="agent-info">
+            <h4>Presented by:</h4>
+            <p><strong>[Your Name]</strong> - Licensed Loan Officer</p>
+            <p>In partnership with <strong>[Agent Name]</strong></p>
+            <p>📧 [your-email] | 📱 [your-phone]</p>
+        </div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+        <h3>🎉 Thank You!</h3>
+        <p>Your information has been received. We'll have your personalized financing information ready in just a few minutes!</p>
+    </div>
+
+    <script>
+        // Auto-populate property information (you can set these via URL parameters)
+        const urlParams = new URLSearchParams(window.location.search);
+        const address = urlParams.get('address') || '123 Main Street';
+        const details = urlParams.get('details') || 'Beautiful 3BR/2BA Home • $450,000';
+        
+        document.getElementById('propertyAddress').textContent = address;
+        document.getElementById('propertyDetails').textContent = details;
+
+        // Handle form submission
+        document.getElementById('signInForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Add property info and timestamp
+            data.propertyAddress = address;
+            data.propertyDetails = details;
+            data.timestamp = new Date().toISOString();
+            data.source = 'open_house_signin';
+            
+            // Log the data (replace with your actual submission logic)
+            console.log('Lead captured:', data);
+            
+            // Here you would typically send the data to your CRM/backend
+            // For now, we'll simulate success
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // You could redirect to a thank you page or payment calculator
+            setTimeout(() => {
+                // window.location.href = '/payment-calculator?email=' + data.email;
+            }, 2000);
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('input, select').forEach(field => {
+            field.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            field.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
